@@ -8,6 +8,7 @@ use App\Format\XML;
 use App\Format\YAML;
 
 use App\Service\Serializer;
+use App\Controller\IndexController;
 
 print_r("Simple Service Container\n\n");
 
@@ -16,5 +17,6 @@ $data = [
     "surname" => "Doe"
 ];
 
-$serializer = new Serializer(new XML());
-var_dump($serializer->serialize($data));
+$serializer = new Serializer(new JSON());
+$controller = new IndexController($serializer);
+var_dump ($controller->index());
