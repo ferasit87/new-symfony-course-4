@@ -1,28 +1,20 @@
 <?php
+declare(strict_types=1);
 
 require __DIR__.'/../vendor/autoload.php';
 
-// use App\Format;
-// use App\Format as F;
-// use App\Format\{JSON,XML,YAML}
-// use App\Format\JSON;
-// use App\Format\XML;
-// use App\Format\YAML;
+use App\Format\JSON;
+use App\Format\XML;
+use App\Format\YAML;
 
-// $json = new App\Format\JSON();
-// $xml = new App\Format\XML();
-// $yml = new App\Format\YAML();
+use App\Service\Serializer;
 
-// $json = new F\JSON();
-// $xml = new F\XML();
-// $yml = new F\YAML();
+print_r("Simple Service Container\n\n");
 
-// $json = new JSON();
-// $xml = new XML();
-// $yml = new YAML();
+$data = [
+    "name" => "John",
+    "surname" => "Doe"
+];
 
-print_r("Namespaces");
-
-// print_r($json);
-// print_r($xml);
-// print_r($yml);
+$serializer = new Serializer(new XML());
+var_dump($serializer->serialize($data));
