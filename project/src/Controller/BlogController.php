@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -33,12 +32,12 @@ class  BlogController extends AbstractController
 
     /**
      * @Route("/{page}", name="blog_list")
-     * @param $page
-     * @return JsonResponse
+     * @param int $page
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function list($page = 1)
     {
-        return new JsonResponse([
+        return $this->json([
            'data' => self::POSTS,
             'page' => $page,
         ]);
@@ -47,23 +46,23 @@ class  BlogController extends AbstractController
     /**
      * @Route("/{id}", name="blog_by_id",requirements={"id"="\d+"})
      * @param string $id
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function post(string $id): JsonResponse
+    public function post(string $id)
     {
 
-        return new JsonResponse(self::POSTS[array_search($id, array_column(self::POSTS, 'id'))]);
+        return $this->json(self::POSTS[array_search($id, array_column(self::POSTS, 'id'))]);
     }
 
     /**
      * @Route("/{slug}", name="blog_by_slug")
      * @param string $slug
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function postBySlug(string $slug): JsonResponse
+    public function postBySlug(string $slug)
     {
 
-        return new JsonResponse(self::POSTS[array_search($slug, array_column(self::POSTS, 'slug'))]);
+        return $this->json(self::POSTS[array_search($slug, array_column(self::POSTS, 'slug'))]);
     }
 
 }
